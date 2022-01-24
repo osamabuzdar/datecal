@@ -13,28 +13,13 @@ class MyInputField extends StatelessWidget {
     return Column(
       children: [
         ListTile(
-          title: TextField(
-            enabled: false,
-            readOnly: true,
-            autofocus: false,
-            maxLines: 1,
-            style: const TextStyle(color: Colors.black, fontSize: 18.0),
-            controller: controller,
-            decoration: InputDecoration(
-                labelStyle: GoogleFonts.ubuntuMono(),
-                disabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25),
-                    borderSide:
-                        const BorderSide(color: Colors.black, width: 0.0)),
-                labelText: labelText),
-            textAlign: TextAlign.start,
-          ),
+          title: Text('$labelText'),
         ),
         ButtonBar(
           children: [
             ElevatedButton.icon(
               onPressed: () {
-                controller!.clear();
+                //      labelText = '';
               },
               icon: const Icon(
                 Icons.clear_all,

@@ -23,7 +23,7 @@ class ChoiceMenu extends StatelessWidget {
                     context,
                     await showDialog(
                         context: context,
-                        builder: (context) => CalendarMenu()));
+                        builder: (context) => const CalendarMenu()));
               },
             ),
             ElevatedButton(
@@ -33,7 +33,7 @@ class ChoiceMenu extends StatelessWidget {
                     context,
                     await showDialog(
                         context: context,
-                        builder: (context) => CalendarMenu()));
+                        builder: (context) => const CalendarMenu()));
               },
             ),
             ElevatedButton(
@@ -43,7 +43,7 @@ class ChoiceMenu extends StatelessWidget {
                     context,
                     await showDialog(
                         context: context,
-                        builder: (context) => CalendarMenu()));
+                        builder: (context) => const CalendarMenu()));
               },
             ),
           ],

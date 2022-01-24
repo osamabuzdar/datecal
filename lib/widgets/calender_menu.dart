@@ -4,7 +4,8 @@ import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CalendarMenu extends StatelessWidget {
-  const CalendarMenu({Key? key}) : super(key: key);
+  const CalendarMenu({Key? key, this.onSelect}) : super(key: key);
+  final VoidCallback? onSelect;
   @override
   Widget build(BuildContext context) {
     var _dateTime = DateTime.now();
@@ -44,19 +45,10 @@ class CalendarMenu extends StatelessWidget {
                   }),
               const Padding(padding: EdgeInsets.symmetric(horizontal: 5.0)),
               ElevatedButton(
-                child: Text('Confirm', style: GoogleFonts.aBeeZee()),
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.blue)),
-                onPressed: () async {
-                  // if (homeBusiness.inputId == 1) {
-                  //   resultBusiness.dateOne = _dateTime;
-                  // } else if (homeBusiness.inputId == 2) {
-                  //   resultBusiness.dateTwo = _dateTime;
-                  // }
-                  // Navigator.pop(
-                  //     context, await homeBusiness.parseText(_dateTime));
-                },
-              )
+                  child: Text('Confirm', style: GoogleFonts.aBeeZee()),
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.blue)),
+                  onPressed: onSelect)
             ],
           ),
         ],

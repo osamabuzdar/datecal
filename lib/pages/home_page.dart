@@ -1,9 +1,10 @@
+import 'package:datecal/controller/selected_date_controller.dart';
 import 'package:datecal/widgets/calender_menu.dart';
-import 'package:datecal/widgets/choice_menu.dart';
 import 'package:datecal/pages/result_page.dart';
-import 'package:datecal/widgets/my_input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,6 +15,35 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final firstDateController = TextEditingController();
   final secondDateController = TextEditingController();
+  DateTime firstDate = DateTime.now();
+  DateTime secondDate = DateTime.now();
+  final _dateFormat = DateFormat('dd-MMM-yyyy');
+
+  Future<void> _setFirstDate(BuildContext context) async {
+    final picked = await showDatePicker(
+        context: context,
+        initialDate: firstDate,
+        firstDate: DateTime.now(),
+        lastDate: DateTime(2101));
+    if (picked != null) {
+      setState(() {
+        firstDate = picked;
+      });
+    }
+  }
+
+  Future<void> _setSecondDate(BuildContext context) async {
+    final picked = await showDatePicker(
+        context: context,
+        initialDate: secondDate,
+        firstDate: DateTime.now(),
+        lastDate: DateTime(2101));
+    if (picked != null) {
+      setState(() {
+        secondDate = picked;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,38 +83,91 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              MyInputField(
-                controller: firstDateController,
-                labelText: 'Set First Date',
-                onDateSelection: () async {
-                  await showDialog(
-                          context: context,
-                          builder: (context) => CalendarMenu()) ??
-                      "";
-                },
-              ),
-              MyInputField(
-                controller: firstDateController,
-                labelText: 'Set Second Date',
-                onDateSelection: () async {
-                  await showDialog(
-                          context: context,
-                          builder: (context) => CalendarMenu()) ??
-                      "";
-                },
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Start Date",
+                      style: GoogleFonts.ubuntuMono(
+                          fontWeight: FontWeight.bold, color: Colors.blue),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.only(left: 10),
+                          child: Center(
+                            child: Text(_dateFormat.format(firstDate)),
+                          ),
+                          decoration: BoxDecoration(
+                              color: Colors.grey.shade100,
+                              borderRadius: BorderRadius.circular(10)),
+                          height: size.height * 0.07,
+                        ),
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            _setFirstDate(context);
+                          },
+                          icon: const Icon(Icons.edit, color: Colors.grey)),
+                    ],
+                  ),
+                  //next maintenance date
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "End Date",
+                      style: GoogleFonts.ubuntuMono(
+                          fontWeight: FontWeight.bold, color: Colors.orange),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.only(left: 10),
+                          child: Center(
+                            child: Text(_dateFormat.format(secondDate)),
+                          ),
+                          decoration: BoxDecoration(
+                              color: Colors.grey.shade100,
+                              borderRadius: BorderRadius.circular(10)),
+                          height: size.height * 0.07,
+                        ),
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            _setSecondDate(context);
+                          },
+                          icon: const Icon(Icons.edit, color: Colors.grey)),
+                    ],
+                  ),
+                ],
               ),
               SizedBox(height: size.height * 0.08),
               ElevatedButton.icon(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ResultPage()));
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text('Please Select Date First',
-                        style: GoogleFonts.ubuntuMono(
-                          color: Colors.white,
-                        )),
-                    backgroundColor: Colors.red,
-                  ));
+                  // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  //   content: Text('Please Select Date First',
+                  //       style: GoogleFonts.ubuntuMono(
+                  //         color: Colors.white,
+                  //       )),
+                  //   backgroundColor: Colors.red,
+                  // ));
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ResultPage(
+                        endDate: secondDate,
+                        startDate: firstDate,
+                      ),
+                    ),
+                  );
                 },
                 icon: const Icon(
                   Icons.calculate,
