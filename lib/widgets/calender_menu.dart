@@ -8,7 +8,8 @@ class CalendarMenu extends StatelessWidget {
   final VoidCallback? onSelect;
   @override
   Widget build(BuildContext context) {
-    var _dateTime = DateTime.now();
+    // ignore: unused_local_variable
+    var dateTime = DateTime.now();
 
     return AlertDialog(
       title: Text('Select Date', style: GoogleFonts.aBeeZee()),
@@ -20,7 +21,7 @@ class CalendarMenu extends StatelessWidget {
             firstDate: DateTime.parse("0000-01-01"),
             lastDate: DateTime.parse("9999-12-31"),
             onChange: (DateTime dateTime, List<int> index) {
-              _dateTime = dateTime;
+              dateTime = dateTime;
             },
             locale: DateTimePickerLocale.pt_br,
             pickerTheme: DateTimePickerTheme(

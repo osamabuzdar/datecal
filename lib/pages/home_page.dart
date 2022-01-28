@@ -1,10 +1,7 @@
-import 'package:datecal/controller/selected_date_controller.dart';
-import 'package:datecal/widgets/calender_menu.dart';
 import 'package:datecal/pages/result_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -37,7 +34,7 @@ class _HomePageState extends State<HomePage> {
         context: context,
         initialDate: secondDate,
         firstDate: DateTime.now(),
-        lastDate: DateTime(2101));
+        lastDate: DateTime(9101));
     if (picked != null) {
       setState(() {
         secondDate = picked;
@@ -56,129 +53,131 @@ class _HomePageState extends State<HomePage> {
             style: GoogleFonts.ubuntuMono(),
           ),
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              const SizedBox(
-                child: Image(
-                  image: AssetImage('assets/images/upper.png'),
-                ),
-              ),
-              const SizedBox(height: 10),
-              Container(
-                width: size.width * 0.8,
-                height: size.height * 0.05,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.lightBlue.shade200,
-                    width: 2,
-                  ),
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: Center(
-                  child: Text(
-                    'Please select first and last date',
-                    style: GoogleFonts.ubuntuMono(),
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                const SizedBox(
+                  child: Image(
+                    image: AssetImage('assets/images/upper.png'),
                   ),
                 ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
+                const SizedBox(height: 10),
+                Container(
+                  width: size.width * 0.8,
+                  height: size.height * 0.05,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.lightBlue.shade200,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Center(
                     child: Text(
-                      "Start Date",
-                      style: GoogleFonts.ubuntuMono(
-                          fontWeight: FontWeight.bold, color: Colors.blue),
+                      'Please select first and last date',
+                      style: GoogleFonts.ubuntuMono(),
                     ),
                   ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          margin: const EdgeInsets.only(left: 10),
-                          child: Center(
-                            child: Text(_dateFormat.format(firstDate)),
-                          ),
-                          decoration: BoxDecoration(
-                              color: Colors.grey.shade100,
-                              borderRadius: BorderRadius.circular(10)),
-                          height: size.height * 0.07,
-                        ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Start Date",
+                        style: GoogleFonts.ubuntuMono(
+                            fontWeight: FontWeight.bold, color: Colors.blue),
                       ),
-                      IconButton(
-                          onPressed: () {
-                            _setFirstDate(context);
-                          },
-                          icon: const Icon(Icons.edit, color: Colors.grey)),
-                    ],
-                  ),
-                  //next maintenance date
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "End Date",
-                      style: GoogleFonts.ubuntuMono(
-                          fontWeight: FontWeight.bold, color: Colors.orange),
                     ),
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          margin: const EdgeInsets.only(left: 10),
-                          child: Center(
-                            child: Text(_dateFormat.format(secondDate)),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            margin: const EdgeInsets.only(left: 10),
+                            child: Center(
+                              child: Text(_dateFormat.format(firstDate)),
+                            ),
+                            decoration: BoxDecoration(
+                                color: Colors.grey.shade100,
+                                borderRadius: BorderRadius.circular(10)),
+                            height: size.height * 0.07,
                           ),
-                          decoration: BoxDecoration(
-                              color: Colors.grey.shade100,
-                              borderRadius: BorderRadius.circular(10)),
-                          height: size.height * 0.07,
                         ),
+                        IconButton(
+                            onPressed: () {
+                              _setFirstDate(context);
+                            },
+                            icon: const Icon(Icons.edit, color: Colors.grey)),
+                      ],
+                    ),
+                    //next maintenance date
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "End Date",
+                        style: GoogleFonts.ubuntuMono(
+                            fontWeight: FontWeight.bold, color: Colors.orange),
                       ),
-                      IconButton(
-                          onPressed: () {
-                            _setSecondDate(context);
-                          },
-                          icon: const Icon(Icons.edit, color: Colors.grey)),
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(height: size.height * 0.08),
-              ElevatedButton.icon(
-                onPressed: () {
-                  // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  //   content: Text('Please Select Date First',
-                  //       style: GoogleFonts.ubuntuMono(
-                  //         color: Colors.white,
-                  //       )),
-                  //   backgroundColor: Colors.red,
-                  // ));
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            margin: const EdgeInsets.only(left: 10),
+                            child: Center(
+                              child: Text(_dateFormat.format(secondDate)),
+                            ),
+                            decoration: BoxDecoration(
+                                color: Colors.grey.shade100,
+                                borderRadius: BorderRadius.circular(10)),
+                            height: size.height * 0.07,
+                          ),
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              _setSecondDate(context);
+                            },
+                            icon: const Icon(Icons.edit, color: Colors.grey)),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(height: size.height * 0.08),
+                ElevatedButton.icon(
+                  onPressed: () {
+                    // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    //   content: Text('Please Select Date First',
+                    //       style: GoogleFonts.ubuntuMono(
+                    //         color: Colors.white,
+                    //       )),
+                    //   backgroundColor: Colors.red,
+                    // ));
 
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ResultPage(
-                        endDate: secondDate,
-                        startDate: firstDate,
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ResultPage(
+                          endDate: secondDate,
+                          startDate: firstDate,
+                        ),
                       ),
-                    ),
-                  );
-                },
-                icon: const Icon(
-                  Icons.calculate,
-                  color: Colors.white,
-                ),
-                label: Text('\t\tCalculate\t\t',
-                    style: GoogleFonts.ubuntuMono(
-                      fontSize: 20,
-                    )),
-              )
-            ],
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.calculate,
+                    color: Colors.white,
+                  ),
+                  label: Text('\t\tCalculate\t\t',
+                      style: GoogleFonts.ubuntuMono(
+                        fontSize: 20,
+                      )),
+                )
+              ],
+            ),
           ),
         ),
       ),
