@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
     final picked = await showDatePicker(
         context: context,
         initialDate: firstDate,
-        firstDate: DateTime.now(),
+        firstDate: DateTime(1001),
         lastDate: DateTime(2101));
     if (picked != null) {
       setState(() {
