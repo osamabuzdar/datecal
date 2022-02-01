@@ -48,6 +48,7 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          elevation: 0.0,
           title: Text(
             'Date Calculator',
             style: GoogleFonts.ubuntuMono(),
@@ -58,10 +59,50 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                const SizedBox(
-                  child: Image(
-                    image: AssetImage('assets/images/upper.png'),
-                  ),
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Container(
+                      height: size.height * 0.25,
+                      color: Colors.blue,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          children: [
+                            Icon(
+                              Icons.calendar_today,
+                              size: size.height * 0.05,
+                              color: Colors.white,
+                            ),
+                            Text(
+                              'dd-mmm-yyyy',
+                              style: GoogleFonts.aBeeZee(color: Colors.white),
+                            )
+                          ],
+                        ),
+                        Icon(
+                          Icons.arrow_right_alt,
+                          size: size.height * 0.05,
+                          color: Colors.white,
+                        ),
+                        Column(
+                          children: [
+                            Icon(
+                              Icons.calendar_view_month_outlined,
+                              size: size.height * 0.05,
+                              color: Colors.white,
+                            ),
+                            Text(
+                              'dd-mmm-yyyy',
+                              style: GoogleFonts.aBeeZee(color: Colors.white),
+                            )
+                          ],
+                        ),
+                      ],
+                    )
+                  ],
                 ),
                 const SizedBox(height: 10),
                 Container(
